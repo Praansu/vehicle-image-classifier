@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pth
+*.pt
+*.onnx
+data/*/
+data/*.zip
+.DS_Store
