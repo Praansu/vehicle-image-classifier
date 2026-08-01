@@ -30,7 +30,8 @@ class VehicleCNN(nn.Module):
 
 
 def create_resnet_model(num_classes=4, pretrained=True):
-    model = models.resnet18(pretrained=pretrained)
+    weights = models.ResNet18_Weights.IMAGENET1K_V1 if pretrained else None
+    model = models.resnet18(weights=weights)
     in_features = model.fc.in_features
     model.fc = nn.Linear(in_features, num_classes)
     return model

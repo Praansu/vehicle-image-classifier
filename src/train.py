@@ -81,6 +81,13 @@ def main():
     if args.use_resnet:
         print('Using ResNet18 with transfer learning')
         model = create_resnet_model(num_classes=num_classes)
+        # Freeze all layers except the final classifier
+        # (standard transfer learning practice — features are already learned,
+        # we only train the new head for our vehicle classes)
+        for param in model.parameters():
+            param.requires_grad = False
+        for param in model.fc.parameters():
+            param.requires_grad = True
     else:
         print('Using CNN from scratch')
         model = VehicleCNN(num_classes=num_classes)
