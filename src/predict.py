@@ -6,7 +6,7 @@ import torchvision.transforms as transforms
 from model import VehicleCNN, create_resnet_model
 
 
-CLASSES = ['car', 'bike', 'bus', 'van']
+CLASSES = ['bus', 'car', 'motorcycle', 'truck']
 
 
 def predict(image_path, model_path, use_resnet=False):
