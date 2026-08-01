@@ -1,9 +1,18 @@
 __pycache__/
 *.pyc
 *.pyo
+
+# Don't commit model weights by default...
 *.pth
 *.pt
 *.onnx
-data/*/
-data/*.zip
+
+# ...except the trained model the API needs (so the repo works out of the box)
+!api/vehicle_model.pth
+
+# Dataset — too big for git. Download instructions in README.
+data/
+data_raw/
+*.zip
+
 .DS_Store
