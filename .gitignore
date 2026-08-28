@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
 *.pyo
+<<<<<<< HEAD
 
 # Don't commit model weights by default...
 *.pth
@@ -15,4 +16,11 @@ data/
 data_raw/
 *.zip
 
+=======
+*.pth
+*.pt
+*.onnx
+data/*/
+data/*.zip
+>>>>>>> 6dd481a (Initial commit: PyTorch vehicle image classifier)
 .DS_Store

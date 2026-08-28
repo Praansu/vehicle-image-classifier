@@ -81,6 +81,7 @@ def main():
     if args.use_resnet:
         print('Using ResNet18 with transfer learning')
         model = create_resnet_model(num_classes=num_classes)
+<<<<<<< HEAD
         # Freeze all layers except the final classifier
         # (standard transfer learning practice — features are already learned,
         # we only train the new head for our vehicle classes)
@@ -88,6 +89,8 @@ def main():
             param.requires_grad = False
         for param in model.fc.parameters():
             param.requires_grad = True
+=======
+>>>>>>> 6dd481a (Initial commit: PyTorch vehicle image classifier)
     else:
         print('Using CNN from scratch')
         model = VehicleCNN(num_classes=num_classes)

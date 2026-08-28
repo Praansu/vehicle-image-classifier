@@ -6,7 +6,11 @@ import torchvision.transforms as transforms
 from model import VehicleCNN, create_resnet_model
 
 
+<<<<<<< HEAD
 CLASSES = ['bus', 'car', 'motorcycle', 'truck']
+=======
+CLASSES = ['car', 'bike', 'bus', 'van']
+>>>>>>> 6dd481a (Initial commit: PyTorch vehicle image classifier)
 
 
 def predict(image_path, model_path, use_resnet=False):
