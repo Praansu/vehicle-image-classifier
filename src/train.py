@@ -52,36 +52,33 @@ def validate(model, loader, criterion, device):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--data_dir', default='data')
-    parser.add_argument('--epochs', type=int, default=20)
-    parser.add_argument('--batch_size', type=int, default=32)
-    parser.add_argument('--lr', type=float, default=0.001)
-    parser.add_argument('--use_resnet', action='store_true')
-    parser.add_argument('--save_path', default='vehicle_model.pth')
+    parser.add_argument("--data_dir", default="data")
+    parser.add_argument("--epochs", type=int, default=20)
+    parser.add_argument("--batch_size", type=int, default=32)
+    parser.add_argument("--lr", type=float, default=0.001)
+    parser.add_argument("--use_resnet", action="store_true")
+    parser.add_argument("--save_path", default="vehicle_model.pth")
     args = parser.parse_args()
 
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print(f'Using device: {device}')
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"Using device: {device}")
 
     train_dataset = VehicleDataset(
-        root_dir=f'{args.data_dir}/train',
-        transform=get_train_transform()
+        root_dir=f"{args.data_dir}/train", transform=get_train_transform()
     )
     val_dataset = VehicleDataset(
-        root_dir=f'{args.data_dir}/val',
-        transform=get_val_transform()
+        root_dir=f"{args.data_dir}/val", transform=get_val_transform()
     )
 
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=False)
 
     num_classes = len(train_dataset.classes)
-    print(f'Classes: {train_dataset.classes}')
+    print(f"Classes: {train_dataset.classes}")
 
     if args.use_resnet:
-        print('Using ResNet18 with transfer learning')
+        print("Using ResNet18 with transfer learning")
         model = create_resnet_model(num_classes=num_classes)
-<<<<<<< HEAD
         # Freeze all layers except the final classifier
         # (standard transfer learning practice — features are already learned,
         # we only train the new head for our vehicle classes)
@@ -89,10 +86,8 @@ def main():
             param.requires_grad = False
         for param in model.fc.parameters():
             param.requires_grad = True
-=======
->>>>>>> 6dd481a (Initial commit: PyTorch vehicle image classifier)
     else:
-        print('Using CNN from scratch')
+        print("Using CNN from scratch")
         model = VehicleCNN(num_classes=num_classes)
 
     model = model.to(device)
@@ -100,16 +95,20 @@ def main():
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
 
     for epoch in range(1, args.epochs + 1):
-        train_loss, train_acc = train_epoch(model, train_loader, criterion, optimizer, device)
+        train_loss, train_acc = train_epoch(
+            model, train_loader, criterion, optimizer, device
+        )
         val_loss, val_acc = validate(model, val_loader, criterion, device)
 
-        print(f'Epoch {epoch:2d}/{args.epochs} | '
-              f'Train Loss: {train_loss:.4f} Acc: {train_acc:.2f}% | '
-              f'Val Loss: {val_loss:.4f} Acc: {val_acc:.2f}%')
+        print(
+            f"Epoch {epoch:2d}/{args.epochs} | "
+            f"Train Loss: {train_loss:.4f} Acc: {train_acc:.2f}% | "
+            f"Val Loss: {val_loss:.4f} Acc: {val_acc:.2f}%"
+        )
 
     torch.save(model.state_dict(), args.save_path)
-    print(f'Model saved to {args.save_path}')
+    print(f"Model saved to {args.save_path}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

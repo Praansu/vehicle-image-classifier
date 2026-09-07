@@ -30,12 +30,8 @@ class VehicleCNN(nn.Module):
 
 
 def create_resnet_model(num_classes=4, pretrained=True):
-<<<<<<< HEAD
     weights = models.ResNet18_Weights.IMAGENET1K_V1 if pretrained else None
     model = models.resnet18(weights=weights)
-=======
-    model = models.resnet18(pretrained=pretrained)
->>>>>>> 6dd481a (Initial commit: PyTorch vehicle image classifier)
     in_features = model.fc.in_features
     model.fc = nn.Linear(in_features, num_classes)
     return model
