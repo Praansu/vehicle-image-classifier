@@ -1,0 +1,6 @@
+# Code Owners
+* @Praansu
+/src/ @Praansu
+/api/ @Praansu
+/.github/ @Praansu
+*.md @Praansu

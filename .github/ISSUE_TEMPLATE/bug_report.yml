@@ -1,0 +1,32 @@
+name: Bug Report
+description: Report a bug in Vehicle Image Classifier
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug!
+  - type: input
+    id: version
+    attributes:
+      label: Version/Commit
+      placeholder: "e.g., main branch, commit abc123"
+    required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      placeholder: "Model prediction failed / API error / Training issue..."
+    required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - Model training
+        - Inference API
+        - Data loading
+        - Docker
+        - Other
+    required: true
