@@ -1,5 +1,5 @@
 fastapi==0.115.0
-uvicorn[standard]==0.30.0
+uvicorn[standard]==0.52.4
 python-multipart==0.0.12
 torch==2.10.0
 torchvision==0.25.0
