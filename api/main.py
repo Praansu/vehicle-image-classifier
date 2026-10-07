@@ -29,8 +29,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load model once at startup
+# Load model once at startup. Weights live on the GitHub Release
+# (weights-v1) instead of in git — downloaded automatically on first run.
 MODEL_PATH = Path(__file__).parent / "vehicle_model.pth"
+WEIGHTS_URL = "https://github.com/Praansu/vehicle-image-classifier/releases/download/weights-v1/vehicle_model.pth"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 _transform = transforms.Compose([
@@ -46,6 +48,11 @@ _model = None
 def get_model():
     global _model
     if _model is None:
+        if not MODEL_PATH.exists():
+            print(f"Weights not found at {MODEL_PATH}, downloading from release...")
+            import urllib.request
+            urllib.request.urlretrieve(WEIGHTS_URL, MODEL_PATH)
+            print("Weights downloaded.")
         _model = create_resnet_model(num_classes=len(CLASSES))
         state_dict = torch.load(MODEL_PATH, map_location=DEVICE)
         _model.load_state_dict(state_dict)
