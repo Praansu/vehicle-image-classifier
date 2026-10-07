@@ -14,9 +14,8 @@ vehicle-image-classifier/
 │   ├── train.py          # training loop with validation
 │   └── predict.py        # CLI prediction on a single image
 ├── api/
-│   ├── main.py           # FastAPI inference API
-│   ├── frontend/         # simple upload + confidence bars UI
-│   └── vehicle_model.pth # trained model (ResNet18, ~90% val accuracy)
+│   ├── main.py           # FastAPI inference API (auto-downloads weights)
+│   └── frontend/         # simple upload + confidence bars UI
 ├── Dockerfile            # containerize the API
 └── requirements*.txt
 ```
@@ -52,6 +51,10 @@ uvicorn api.main:app --reload
 ```
 
 Open http://localhost:8000 — upload a vehicle photo, see the top prediction and confidence bars for all 4 classes.
+
+### Model weights
+
+`vehicle_model.pth` (~45MB) is **not** in git — it lives on the [weights-v1 Release](https://github.com/Praansu/vehicle-image-classifier/releases/tag/weights-v1), and `api/main.py` downloads it automatically on first run if it's missing.
 
 ### Docker
 
