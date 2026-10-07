@@ -27,4 +27,6 @@ docker run -p 8000:8000 vehicle-classifier
 
 ## Model
 
-`api/vehicle_model.pth` — ResNet18 fine-tuned on 320 vehicle images (bus, car, motorcycle, truck) with a frozen backbone. ~90% validation accuracy.
+ResNet18 fine-tuned on 320 vehicle images (bus, car, motorcycle, truck) with a frozen backbone. ~90% validation accuracy.
+
+Weights are **not** in git — they live on the [weights-v1 Release](https://github.com/Praansu/vehicle-image-classifier/releases/tag/weights-v1) and the API downloads them automatically on first run if `api/vehicle_model.pth` is missing.
